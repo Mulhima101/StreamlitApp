@@ -1,46 +1,44 @@
 import streamlit as st
-from PIL import Image
+import pandas as pd
 import numpy as np
+import altair as alt
 
-
-# Title and description
 st.title("Sentiment Analysis App")
 st.write(" Building a Machine Learning Application with Streamlit")
 
-# Load dataset and train model
-digits = load_digits()
-X_train, X_test, y_train, y_test = train_test_split(digits.data, digits.target, test_size=0.2, random_state=42)
-model = LogisticRegression(max_iter=10000)
-model.fit(X_train, y_train)
 
-# Sidebar for user input
-st.sidebar.title("Upload Image")
-uploaded_file = st.sidebar.file_uploader("", type=["png", "jpg", "jpeg"])
+st.sidebar.title("User Input")
+uploaded_file = st.sidebar.file_uploader("Upload a file", type=["csv", "png", "jpg", "mp4", "mp3"])
 
-# Display the uploaded image
+
 if uploaded_file is not None:
-    image = Image.open(uploaded_file)
-    st.image(image, caption='Uploaded Image.', use_column_width=True)
-    image = image.convert('L').resize((8, 8))
-    img_array = np.array(image).reshape(1, -1)
-    st.write("")
-    st.write("Classifying...")
+    file_details = {"Filename": uploaded_file.name, "FileType": uploaded_file.type, "FileSize": uploaded_file.size}
+    if uploaded_file.type == "image/png" or uploaded_file.type == "image/jpeg":
+        st.image(uploaded_file)
+    elif uploaded_file.type == "video/mp4":
+        st.video(uploaded_file)
+    elif uploaded_file.type == "audio/mp3":
+        st.audio(uploaded_file)
 
-    # Normalize the image array
-    img_array = img_array / 16.0
 
-    # Make predictions
-    prediction = model.predict(img_array)
-    st.write(f"Predicted Digit: {prediction[0]}")
+slider_value = st.slider("Select a value", 0, 100)
+text_input = st.text_input("Enter some text")
 
-# Display model performance
-st.write("Model Performance:")
-y_pred = model.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-st.write(f"Accuracy: {accuracy:.2f}")
 
-# Display confusion matrix
-cm = confusion_matrix(y_test, y_pred)
-fig, ax = plt.subplots()
-ConfusionMatrixDisplay(cm).plot(ax=ax)
-st.pyplot(fig)
+progress_bar = st.progress(0)
+for i in range(100):
+    progress_bar.progress(i + 1)
+
+
+data = pd.DataFrame(np.random.randn(100, 3), columns=['a', 'b', 'c'])
+chart = alt.Chart(data).mark_line().encode(x='a', y='b')
+st.altair_chart(chart)
+
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+X = data[['a']]
+y = data['b']
+model.fit(X, y)
+predictions = model.predict(X)
+st.write("Model Predictions:", predictions)
