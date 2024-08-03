@@ -20,3 +20,5 @@ This project is a machine learning application built using Streamlit. The applic
    ```bash
    git clone https://github.com/Mulhima101/StreamlitApp.git
    cd StreamlitApp
+   streamlit run app.py
+   
