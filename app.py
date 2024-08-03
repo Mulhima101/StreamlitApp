@@ -1,11 +1,7 @@
 import streamlit as st
 from PIL import Image
 import numpy as np
-from skimage.transform import resize
-from sklearn.datasets import load_digits
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
+
 
 # Title and description
 st.title("Sentiment Analysis App")
