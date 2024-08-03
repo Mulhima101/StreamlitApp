@@ -1,24 +1,43 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from PIL import Image
 import altair as alt
+import time
 
 st.title("Sentiment Analysis App")
 st.write(" Building a Machine Learning Application with Streamlit")
 
 
 st.sidebar.title("User Input")
-uploaded_file = st.sidebar.file_uploader("Upload a file", type=["csv", "png", "jpg", "mp4", "mp3"])
+uploaded_file = st.sidebar.file_uploader("Upload an image file", type=["png", "jpg", "jpeg"])
 
 
 if uploaded_file is not None:
-    file_details = {"Filename": uploaded_file.name, "FileType": uploaded_file.type, "FileSize": uploaded_file.size}
-    if uploaded_file.type == "image/png" or uploaded_file.type == "image/jpeg":
-        st.image(uploaded_file)
-    elif uploaded_file.type == "video/mp4":
-        st.video(uploaded_file)
-    elif uploaded_file.type == "audio/mp3":
-        st.audio(uploaded_file)
+    image = Image.open(uploaded_file)
+    st.image(image, caption='Uploaded Image', use_column_width=True)
+
+    image = image.convert('L')
+    image_data = np.array(image).flatten()
+
+    df = pd.DataFrame(image_data, columns=['Pixel Value'])
+    df['Index'] = df.index
+
+    X = df[['Index']].values
+    y = df['Pixel Value'].values
+
+    X_b = np.c_[np.ones((X.shape[0], 1)), X]
+
+    theta_best = np.linalg.inv(X_b.T.dot(X_b)).dot(X_b.T).dot(y)
+
+    y_pred = X_b.dot(theta_best)
+
+    st.write("Model Coefficients:", theta_best)
+    st.write("Predictions:", y_pred)
+
+    df['Predictions'] = y_pred
+    chart = alt.Chart(df).mark_line().encode(x='Index', y='Predictions')
+    st.altair_chart(chart)
 
 
 slider_value = st.slider("Select a value", 0, 100)
@@ -27,18 +46,10 @@ text_input = st.text_input("Enter some text")
 
 progress_bar = st.progress(0)
 for i in range(100):
+    time.sleep(0.02)
     progress_bar.progress(i + 1)
 
 
 data = pd.DataFrame(np.random.randn(100, 3), columns=['a', 'b', 'c'])
 chart = alt.Chart(data).mark_line().encode(x='a', y='b')
 st.altair_chart(chart)
-
-from sklearn.linear_model import LinearRegression
-
-model = LinearRegression()
-X = data[['a']]
-y = data['b']
-model.fit(X, y)
-predictions = model.predict(X)
-st.write("Model Predictions:", predictions)
