@@ -5,6 +5,7 @@ from PIL import Image
 import altair as alt
 import time
 
+# Title and Description
 st.title("Sentiment Analysis App")
 st.write(" Building a Machine Learning Application with Streamlit")
 
