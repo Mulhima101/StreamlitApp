@@ -1,7 +1,6 @@
 import streamlit as st
 from PIL import Image
 import numpy as np
-import matplotlib.pyplot as plt
 from skimage.transform import resize
 from sklearn.datasets import load_digits
 from sklearn.model_selection import train_test_split
