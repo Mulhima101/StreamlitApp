@@ -4,7 +4,6 @@
 This project is a machine learning application built using Streamlit. The application performs a linear regression task on image data and includes features to upload and display images, utilize input widgets, show progress and status updates, incorporate sidebars and containers, and visualize data with graphs.
 
 ## Features
-- **Machine Learning Task**: Linear regression on image data.
 - **Media Display**: Upload and display image files.
 - **Input Widgets**: Sliders, buttons, and text inputs for user interaction.
 - **Progress and Status Updates**: Progress bars to inform users about the application's state.
@@ -20,3 +19,5 @@ This project is a machine learning application built using Streamlit. The applic
    ```bash
    git clone https://github.com/Mulhima101/StreamlitApp.git
    cd StreamlitApp
+   streamlit run app.py
+   
