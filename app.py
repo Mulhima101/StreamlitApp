@@ -17,7 +17,7 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Uploaded Image', use_column_width=True)
 
-    image = image.convert('L')
+    image = image.convert('L').resize((100,100))
     image_data = np.array(image).flatten()
 
     df = pd.DataFrame(image_data, columns=['Pixel Value'])
