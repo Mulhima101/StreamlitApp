@@ -1,23 +1,24 @@
-# Machine Learning Application with Streamlit
+# Food Image Classification App
 
 ## Project Overview
-This project is a machine learning application built using Streamlit. The application performs a linear regression task on image data and includes features to upload and display images, utilize input widgets, show progress and status updates, incorporate sidebars and containers, and visualize data with graphs.
+This project is a machine learning application built using Streamlit. The application classifies food images using a pre-trained convolutional neural network (CNN) model. The application allows users to upload images, processes these images to predict their food category, and provides interactive elements such as sliders and text inputs.
 
 ## Features
 - **Media Display**: Upload and display image files.
-- **Input Widgets**: Sliders, buttons, and text inputs for user interaction.
-- **Progress and Status Updates**: Progress bars to inform users about the application's state.
-- **Sidebar and Container**: Organize input widgets and information using Streamlit's sidebar and container features.
-- **Graphs**: Visualize data and model predictions using Altair.
+- **Image Preprocessing**: Convert uploaded images to RGB, resize them, and normalize pixel values.
+- **Model Prediction**: Use a pre-trained model to predict the food category of the uploaded image.
+- **Progress Indicator**: Circular progress bar to indicate model processing status.
+- **Input Widgets**: Sliders and text inputs for user interaction.
+- **Data Visualization**: Visualize random data with graphs using Altair.
 
 ## Requirements
 - Python 3.7+
 - Libraries: `numpy`, `pandas`, `streamlit`, `pillow`, `altair`
+```bash
+   pip install numpy pandas streamlit pillow altair
 
 ## Installation
 1. Clone the repository:
    ```bash
    git clone https://github.com/Mulhima101/StreamlitApp.git
    cd StreamlitApp
-   streamlit run app.py
-   
