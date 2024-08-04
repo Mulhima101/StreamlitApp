@@ -14,11 +14,13 @@ This project is a machine learning application built using Streamlit. The applic
 ## Requirements
 - Python 3.7+
 - Libraries: `numpy`, `pandas`, `streamlit`, `pillow`, `altair`
-```bash
-   pip install numpy pandas streamlit pillow altair
+   ```bash
+      pip install numpy pandas streamlit pillow altair
+   ```
 
 ## Installation
 1. Clone the repository:
    ```bash
    git clone https://github.com/Mulhima101/StreamlitApp.git
    cd StreamlitApp
+   ```
